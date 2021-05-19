@@ -6,6 +6,8 @@ This project is a [YouTube] clone. This project was bootstrapped with [Create Re
 
 The website is live at <https://youtewb.netlify.app> on [Netlify].
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/914b968b-b415-4c05-8c2a-91cf94c152c8/deploy-status)](https://app.netlify.com/sites/youtewb/deploys)
+
 ## Available Scripts
 
 In the project directory, you can run:
