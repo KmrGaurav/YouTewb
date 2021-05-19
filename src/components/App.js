@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import Header from './Header'
+import { Header, SearchVideosList } from '.'
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -8,8 +8,7 @@ const App = () => {
     return (
         <>
             <Header setSearchTerm={setSearchTerm}/>
-            <h2>SearchTerm: {searchTerm}</h2>
-            <h2>SearchTerm: {searchTerm}</h2>
+            <SearchVideosList searchTerm={searchTerm} />
         </>
     )
 }
