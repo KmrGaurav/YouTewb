@@ -1,2 +1,2 @@
-export { default as Header           } from './Header'
-export { default as SearchVideosList } from './SearchVideosList'
+export { default as Header         } from './Header'
+export { default as HomeVideosList } from './HomeVideosList'
