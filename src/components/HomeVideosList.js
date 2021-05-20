@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const HomeVideosList = () => {
-    const [fetchedVideos, setFetchedResults] = useState({})
+    const [fetchedVideos, setFetchedVideos] = useState({})
     const classes = useStyles()
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const HomeVideosList = () => {
                     maxResults: 5
                 }
             })
-            setFetchedResults(res.data)
+            setFetchedVideos(res.data)
         })()
     }, [])
 

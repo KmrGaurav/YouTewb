@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles } from '@material-ui/core'
 
 import youtube from '../apis/youtube'
+import SearchVideoCard from './SearchVideoCard'
 
 const useStyles = makeStyles(theme => ({
     container: {
         paddingTop: '70px',
 
-
-    }
+        maxWidth: '70%',
+        margin: 'auto'
+    },
 }))
 
 const SearchVideosList = ({ searchTerm }) => {
+    const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({})
     const classes = useStyles()
 
     useEffect(() => {
@@ -19,16 +22,24 @@ const SearchVideosList = ({ searchTerm }) => {
             const res = await youtube.get('/search', {
                 params: {
                     q: searchTerm,
-                    maxResults: 5
+                    maxResults: 3
                 }
             })
-            console.log(res)
+            setFetchedSearchedVideos(res.data)
         })()
     }, [searchTerm])
-    
+
+    if (!fetchedSearchedVideos.etag) {
+        return null
+    }
+
     return (
-        <Grid className={classes.container}>
-            <h1>SearchVideosList</h1>
+        <Grid container className={classes.container}>
+            {fetchedSearchedVideos.items.map(item => (
+                <Grid item key={item.etag}>
+                    <SearchVideoCard item={item} />
+                </Grid>
+            ))}
         </Grid>
     )
 }
