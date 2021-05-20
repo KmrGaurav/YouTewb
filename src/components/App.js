@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Header, HomeVideosList } from '.'
+import { Header, HomeVideosList, SearchVideosList } from '.'
 
 const App = () => {
     const [searchTerm, setSearchTerm] = useState('')
@@ -8,7 +8,8 @@ const App = () => {
     return (
         <>
             <Header setSearchTerm={setSearchTerm}/>
-            <HomeVideosList />
+            {/* <HomeVideosList /> */}
+            { searchTerm ? <SearchVideosList searchTerm={searchTerm} /> : null }
         </>
     )
 }
