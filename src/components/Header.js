@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { AppBar, Toolbar, InputBase, Typography, makeStyles } from '@material-ui/core'
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SearchIcon from '@material-ui/icons/Search';
+import { Link, useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -14,7 +15,11 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        textDecoration: 'none',
+        "&:visited": {
+            color: 'inherit'
+        }
     },
     search: {
         display: 'flex',
@@ -44,36 +49,41 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Header = (props) => {
+const Header = ({ searchTerm, setSearchTerm }) => {
+    useEffect(() => {
+        if (document.location.search) {
+            setSearchTerm(document.location.search.split('=')[1].split('+').join(' '))
+        }
+    }, [setSearchTerm])
+
     const classes = useStyles()
-    const [searchText, setSearchText] = useState('')
+    const history = useHistory()
 
     const onSearchSubmit = (e) => {
         e.preventDefault()
 
-        if(searchText) {
-            props.setSearchTerm(searchText)
-            setSearchText('')
+        if(searchTerm) {
+            history.push(`/results?search_query=${searchTerm.split(' ').join('+')}`)
         }
     }
 
     return (
         <AppBar className={classes.appBar}>
             <Toolbar className={classes.toolBar}>
-                <div className={classes.title}>
+                <Link to="/" className={classes.title}>
                     <YouTubeIcon style={{color: 'red'}}/>
                     <Typography variant="h6" noWrap>YouTewb</Typography>
-                </div>
+                </Link>
                 <form onSubmit={onSearchSubmit} className={classes.search}>
                     <InputBase
-                        value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Search"
                         classes={{
                             root: classes.inputRoot,
                             input: classes.inputInput,
                         }}
-                        inputProps={{ 'aria-label': 'search' }}
+                        inputProps={{ spellCheck: 'false', 'aria-label': 'search' }}
                     />
                     <button type="submit" className={classes.searchIcon}>
                         <SearchIcon />

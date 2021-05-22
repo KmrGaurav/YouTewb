@@ -13,9 +13,11 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const SearchVideosList = ({ searchTerm }) => {
+const SearchVideosList = (props) => {
     const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({})
     const classes = useStyles()
+
+    const searchTerm = props.location.search.split('=')[1]
 
     useEffect(() => {
         (async () => {
