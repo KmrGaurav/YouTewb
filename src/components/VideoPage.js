@@ -1,6 +1,7 @@
 import React from 'react'
 import { Grid, makeStyles } from '@material-ui/core'
 
+import urlParser from '../utils/urlParser'
 import VideoPlayer from './VideoPlayer'
 
 const useStyles = makeStyles(theme => ({
@@ -20,24 +21,18 @@ const useStyles = makeStyles(theme => ({
 const VideoPage = () => {
     const classes = useStyles()
 
-    if (document.location.search) {
-        if (document.location.search.split('?')[1]) {
-            if (document.location.search.split('?')[1].split('=')) {
-                const videoId = document.location.search.split('?')[1].split('=')[1]
-                
-                return (
-                    <Grid container className={classes.container}>
-                        <Grid item className={classes.videoResponsive}>
-                            <VideoPlayer videoId={videoId} />
-                        </Grid>
-                    </Grid>
-                )
-            }
-        }
+    const videoId = urlParser('watch', 'v')
+    if (videoId) {
+        return (
+            <Grid container className={classes.container}>
+                <Grid item className={classes.videoResponsive}>
+                    <VideoPlayer videoId={videoId} />
+                </Grid>
+            </Grid>
+        )
     } else {
         return null
     }
-
 }
 
 export default VideoPage

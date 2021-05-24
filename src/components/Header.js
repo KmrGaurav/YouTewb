@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { AppBar, Toolbar, InputBase, Typography, makeStyles } from '@material-ui/core'
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link, useHistory } from 'react-router-dom'
+
+import urlParser from '../utils/urlParser'
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -49,22 +51,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Header = ({ searchTerm, setSearchTerm }) => {
-    useEffect(() => {
-        const location = document.location
+const Header = () => {
+    const [searchTerm, setSearchTerm] = useState('')
 
-        if (location.pathname === '/results') {
-            const query = location.search.split('?')[1]
-            
-            if (query) {
-                if (query.split('=')[0] === 'search_query') {
-                    if (query.split('=')[1]) {
-                        setSearchTerm(query.split('=')[1].split('+').join(' '))
-                    }
-                }
-            }
+    const value = urlParser('results', 'search_query')
+    useEffect(() => {
+        if (value) {
+            setSearchTerm(value.split('+').join(' '))
         }
-    }, [setSearchTerm])
+    }, [value])
 
     const classes = useStyles()
     const history = useHistory()

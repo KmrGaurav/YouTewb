@@ -3,6 +3,7 @@ import { Grid, makeStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 import youtube from '../apis/youtube'
+import urlParser from '../utils/urlParser'
 import SearchVideoCard from './SearchVideoCard'
 
 const useStyles = makeStyles(theme => ({
@@ -17,21 +18,22 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const SearchVideosList = (props) => {
+const SearchVideosList = () => {
     const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({})
     const classes = useStyles()
 
-    const searchTerm = props.location.search.split('=')[1]
-
+    const searchTerm = urlParser('results', 'search_query')
     useEffect(() => {
         (async () => {
-            const res = await youtube.get('/search', {
-                params: {
-                    q: searchTerm,
-                    maxResults: 3
-                }
-            })
-            setFetchedSearchedVideos(res.data)
+            if (searchTerm) {
+                const res = await youtube.get('/search', {
+                    params: {
+                        q: searchTerm,
+                        maxResults: 3
+                    }
+                })
+                setFetchedSearchedVideos(res.data)
+            }    
         })()
     }, [searchTerm])
 
