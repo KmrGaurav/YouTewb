@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, makeStyles } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 import youtube from '../apis/youtube'
 import SearchVideoCard from './SearchVideoCard'
@@ -11,6 +12,9 @@ const useStyles = makeStyles(theme => ({
         maxWidth: '70%',
         margin: 'auto'
     },
+    link: {
+        textDecoration: 'none'
+    }
 }))
 
 const SearchVideosList = (props) => {
@@ -39,7 +43,9 @@ const SearchVideosList = (props) => {
         <Grid container className={classes.container}>
             {fetchedSearchedVideos.items.map(item => (
                 <Grid item key={item.etag}>
-                    <SearchVideoCard item={item} />
+                    <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
+                        <SearchVideoCard item={item} />
+                    </Link>
                 </Grid>
             ))}
         </Grid>

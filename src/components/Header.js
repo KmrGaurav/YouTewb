@@ -51,12 +51,18 @@ const useStyles = makeStyles(theme => ({
 
 const Header = ({ searchTerm, setSearchTerm }) => {
     useEffect(() => {
-        if         (document.location.search) {
-            if     (document.location.search.split('?')[1]) {
-                if (document.location.search.split('?')[1].split('=')[1]) {
-                    setSearchTerm(document.location.search.split('=')[1].split('+').join(' '))
+        const location = document.location
+
+        if (location.pathname === '/results') {
+            const query = location.search.split('?')[1]
+            
+            if (query) {
+                if (query.split('=')[0] === 'search_query') {
+                    if (query.split('=')[1]) {
+                        setSearchTerm(query.split('=')[1].split('+').join(' '))
+                    }
                 }
-            } 
+            }
         }
     }, [setSearchTerm])
 
