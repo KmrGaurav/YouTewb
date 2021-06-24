@@ -24,17 +24,17 @@ const SearchVideosList = () => {
 
     const searchTerm = urlParser('results', 'search_query')
     useEffect(() => {
-        (async () => {
-            if (searchTerm) {
+        if (searchTerm) {
+            (async () => {
                 const res = await youtube.get('/search', {
                     params: {
                         q: searchTerm,
-                        maxResults: 3
+                        maxResults: process.env.REACT_APP_YOUTUBE_SEARCH_PAGE_VIDEOS_COUNT
                     }
                 })
                 setFetchedSearchedVideos(res.data)
-            }    
-        })()
+            })()
+        }    
     }, [searchTerm])
 
     if (!fetchedSearchedVideos.etag) {

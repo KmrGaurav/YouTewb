@@ -25,7 +25,7 @@ const HomeVideosList = () => {
         (async () => {
             const res = await youtube.get('/search', {
                 params: {
-                    maxResults: 5
+                    maxResults: process.env.REACT_APP_YOUTUBE_HOME_PAGE_VIDEOS_COUNT
                 }
             })
             setFetchedVideos(res.data)
