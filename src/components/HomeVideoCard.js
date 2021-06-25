@@ -3,7 +3,12 @@ import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-
 
 const useStyles = makeStyles(theme => ({
     cardMedia: {
-        minHeight: 180
+        minHeight: 180,
+        minWidth: 320,
+        [theme.breakpoints.down('md')]: {
+            height: 180,
+            width: 320,
+        }
     }
 }))
 

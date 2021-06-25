@@ -11,7 +11,16 @@ const useStyles = makeStyles(theme => ({
         paddingTop: '70px',
 
         maxWidth: '70%',
-        margin: 'auto'
+        margin: 'auto',
+        [theme.breakpoints.between('sm', 'md')]: {
+            maxWidth: '80%'
+        },
+        [theme.breakpoints.between('xs', 'sm')]: {
+            maxWidth: '90%'
+        },
+        [theme.breakpoints.down('xs')]: {
+            maxWidth: '100%'
+        }
     },
     link: {
         textDecoration: 'none'
@@ -44,11 +53,13 @@ const SearchVideosList = () => {
     return (
         <Grid container className={classes.container}>
             {fetchedSearchedVideos.items.map(item => (
-                <Grid item key={item.etag}>
-                    <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
-                        <SearchVideoCard item={item} />
-                    </Link>
-                </Grid>
+                item.id.kind === 'youtube#video' ? 
+                    <Grid item key={item.etag}>
+                        <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
+                            <SearchVideoCard item={item} />
+                        </Link>
+                    </Grid>
+                : null
             ))}
         </Grid>
     )

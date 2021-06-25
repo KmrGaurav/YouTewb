@@ -17,7 +17,10 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        [theme.breakpoints.down('md')]: {
+            maxWidth: '100%'
+        }
     },
     videoDetail: {
         display: 'flex',
@@ -40,6 +43,14 @@ const useStyles = makeStyles(theme => ({
         '& > *': {
             margin: '0 4px',
             fontWeight: 'bold'
+        }
+    },
+    description: {
+        width: '70%', 
+        margin: '50px',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+            margin: '30px 10px'
         }
     }
 }))
@@ -102,7 +113,7 @@ const VideoPage = () => {
                                 </div>
                             </div>
                             <hr style={{ margin: '20px 0', color: 'red' }} />
-                            <Typography variant="body1" component="h5" style={{ width: '70%', margin: '50px' }}>
+                            <Typography variant="body1" component="h5" className={classes.description}>
                                 {videoDetail.snippet.description}
                             </Typography>
                         </>

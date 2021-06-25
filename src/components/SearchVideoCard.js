@@ -3,14 +3,26 @@ import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-
 
 const useStyles = makeStyles(theme => ({
     cardContent: {
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column'
+        }
     },
     cardMedia: {
         minHeight: 180,
-        minWidth: 320
+        minWidth: 320,
+        [theme.breakpoints.down('md')]: {
+            height: 180,
+            width: 320,
+        }
     },
     videoInfo: {
-        marginLeft: '20px'
+        marginLeft: '20px',
+        '& > h2:last-child': {
+            [theme.breakpoints.down('xs')]: {
+                display: 'none'
+            }
+        }
     }
 }))
 

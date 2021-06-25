@@ -10,7 +10,10 @@ const useStyles = makeStyles(theme => ({
         paddingTop: '70px',
 
         maxWidth: '90%',
-        margin: 'auto'
+        margin: 'auto',
+        [theme.breakpoints.down('md')]: {
+            maxWidth: '100%'
+        }
     },
     link: {
         textDecoration: 'none'
@@ -39,11 +42,13 @@ const HomeVideosList = () => {
     return (
         <Grid className={classes.container} container spacing={2}>
             {fetchedVideos.items.map(item => (
-                <Grid key={item.etag} item xs={3}>
-                    <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
-                        <HomeVideoCard item={item} />
-                    </Link>
-                </Grid>
+                item.id.kind === 'youtube#video' ?
+                    <Grid key={item.etag} item xs={12} sm={6} md={3}>
+                        <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
+                            <HomeVideoCard item={item} />
+                        </Link>
+                    </Grid>
+                : null
             ))}
         </Grid>
     )
