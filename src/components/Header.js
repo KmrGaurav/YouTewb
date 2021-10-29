@@ -2,14 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { AppBar, Toolbar, InputBase, Typography, makeStyles } from '@material-ui/core'
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SearchIcon from '@material-ui/icons/Search';
+
+import { Popper, ClickAwayListener, MenuList, MenuItem, IconButton, Switch } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+
 import { Link, useHistory } from 'react-router-dom'
 
 import urlParser from '../utils/urlParser'
 
 const useStyles = makeStyles(theme => ({
     appBar: {
-        background: 'white',
-        color: 'black'
+        background: theme.palette.primary.main,
+        color: theme.palette.text.primary
     },
     toolBar: {
         display: 'flex',
@@ -51,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const Header = () => {
+const Header = ({ darkMode, setDarkMode }) => {
     const [searchTerm, setSearchTerm] = useState('')
 
     const value = urlParser('results', 'search_query')
@@ -71,6 +76,21 @@ const Header = () => {
             history.push(`/results?search_query=${searchTerm.split(' ').join('+')}`)
         }
     }
+
+    const [open, setOpen] = React.useState(false);
+    const anchorRef = React.useRef(null);
+
+    const handleToggle = () => {
+        setOpen((prevOpen) => !prevOpen);
+    };
+    
+    const handleClose = (event) => {
+        if (anchorRef.current && anchorRef.current.contains(event.target)) {
+            return;
+        }
+    
+        setOpen(false);
+    };
 
     return (
         <AppBar className={classes.appBar}>
@@ -94,7 +114,24 @@ const Header = () => {
                         <SearchIcon />
                     </button>
                 </form>
-                <div />
+                {/* <div> */}
+                    <IconButton ref={anchorRef} onClick={handleToggle} color="inherit">
+                        <MoreVertIcon />
+                    </IconButton>
+                    <Popper open={open} anchorEl={anchorRef.current} style={{ zIndex: '1100' }} placement="left-start">
+                        {/* <Paper> */}
+                            <ClickAwayListener onClickAway={handleClose}>
+                                <MenuList>
+                                    <MenuItem>
+                                        <Brightness4Icon style={{ marginRight: '16px' }} />
+                                        Appearance: Dark
+                                        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+                                    </MenuItem>
+                                </MenuList>
+                            </ClickAwayListener>
+                        {/* </Paper> */}
+                    </Popper>
+                {/* </div> */}
             </Toolbar>
         </AppBar>
     )
