@@ -2,7 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import { Header, HomeVideosList, SearchVideosList, VideoPage } from '.';
+import Header from "common/Header";
+import { HomeVideosList, SearchVideosList, VideoPage, ChannelPage } from 'containers';
 import withTheme from './Theme';
 
 const useStyles = makeStyles(theme => ({
@@ -20,12 +21,13 @@ const App = (props) => {
         <div className={classes.root}>
             <Router>
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-                <Route path="/"        exact component={HomeVideosList} />
+                <Route path="/" exact component={HomeVideosList} />
                 <Route path="/results" exact component={SearchVideosList} />
-                <Route path="/watch"   exact component={VideoPage} />
+                <Route path="/watch" exact component={VideoPage} />
+                <Route path="/c" component={ChannelPage} />
             </Router>
         </div>
     );
-}
+};
 
 export default withTheme(App);

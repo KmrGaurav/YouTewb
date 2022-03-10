@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Grid, makeStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Grid, makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import youtube from '../apis/youtube'
-import urlParser from '../utils/urlParser'
-import SearchVideoCard from './SearchVideoCard'
+import youtube from 'apis/youtube';
+import urlParser from 'utils/urlParser';
+import SearchVideoCard from './SearchVideoCard';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
     link: {
         textDecoration: 'none'
     }
-}))
+}));
 
 const SearchVideosList = () => {
-    const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({})
-    const classes = useStyles()
+    const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({});
+    const classes = useStyles();
 
-    const searchTerm = urlParser('results', 'search_query')
+    const searchTerm = urlParser('results', 'search_query');
     useEffect(() => {
         if (searchTerm) {
             (async () => {
@@ -40,29 +40,29 @@ const SearchVideosList = () => {
                         q: searchTerm,
                         maxResults: process.env.REACT_APP_YOUTUBE_SEARCH_PAGE_VIDEOS_COUNT
                     }
-                })
-                setFetchedSearchedVideos(res.data)
-            })()
-        }    
-    }, [searchTerm])
+                });
+                setFetchedSearchedVideos(res.data);
+            })();
+        }
+    }, [searchTerm]);
 
     if (!fetchedSearchedVideos.etag) {
-        return null
+        return null;
     }
 
     return (
         <Grid container className={classes.container}>
             {fetchedSearchedVideos.items.map(item => (
-                item.id.kind === 'youtube#video' ? 
+                item.id.kind === 'youtube#video' ?
                     <Grid item key={item.etag}>
                         <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
                             <SearchVideoCard item={item} />
                         </Link>
                     </Grid>
-                : null
+                    : null
             ))}
         </Grid>
-    )
-}
+    );
+};
 
-export default SearchVideosList
+export default SearchVideosList;

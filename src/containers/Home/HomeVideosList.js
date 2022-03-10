@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { Grid, makeStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Grid, makeStyles } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import youtube from '../apis/youtube'
-import HomeVideoCard from './HomeVideoCard'
+import youtube from 'apis/youtube';
+
+import HomeVideoCard from './HomeVideoCard';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -18,11 +19,11 @@ const useStyles = makeStyles(theme => ({
     link: {
         textDecoration: 'none'
     }
-}))
+}));
 
 const HomeVideosList = () => {
-    const [fetchedVideos, setFetchedVideos] = useState({})
-    const classes = useStyles()
+    const [fetchedVideos, setFetchedVideos] = useState({});
+    const classes = useStyles();
 
     useEffect(() => {
         (async () => {
@@ -30,13 +31,13 @@ const HomeVideosList = () => {
                 params: {
                     maxResults: process.env.REACT_APP_YOUTUBE_HOME_PAGE_VIDEOS_COUNT
                 }
-            })
-            setFetchedVideos(res.data)
-        })()
-    }, [])
+            });
+            setFetchedVideos(res.data);
+        })();
+    }, []);
 
     if (!fetchedVideos.etag) {
-        return null
+        return null;
     }
 
     return (
@@ -48,10 +49,10 @@ const HomeVideosList = () => {
                             <HomeVideoCard item={item} />
                         </Link>
                     </Grid>
-                : null
+                    : null
             ))}
         </Grid>
-    )
-}
+    );
+};
 
-export default HomeVideosList
+export default HomeVideosList;

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { Grid, Typography, makeStyles } from '@material-ui/core'
-import ThumbUpIcon   from '@material-ui/icons/ThumbUp';
+import React, { useState, useEffect } from 'react';
+import { Grid, Typography, makeStyles } from '@material-ui/core';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
-import youtube from '../apis/youtube'
-import urlParser from '../utils/urlParser'
-import VideoPlayer from './VideoPlayer'
+import youtube from 'apis/youtube';
+import urlParser from 'utils/urlParser';
+
+import VideoPlayer from './VideoPlayer';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -46,21 +47,21 @@ const useStyles = makeStyles(theme => ({
         }
     },
     description: {
-        width: '70%', 
+        width: '70%',
         margin: '50px',
         [theme.breakpoints.down('md')]: {
             width: '100%',
             margin: '30px 10px'
         }
     }
-}))
+}));
 
 const VideoPage = () => {
-    const [videoDetail, setVideoDetail] = useState({})
+    const [videoDetail, setVideoDetail] = useState({});
 
-    const classes = useStyles()
+    const classes = useStyles();
 
-    const videoId = urlParser('watch', 'v')
+    const videoId = urlParser('watch', 'v');
     useEffect(() => {
         if (videoId) {
             (async () => {
@@ -69,25 +70,25 @@ const VideoPage = () => {
                         part: 'snippet,statistics',//,contentDetails',
                         id: videoId
                     }
-                })
+                });
 
-                const detail = res.data.items[0]
-                
-                const publishedAt = new Date(detail.snippet.publishedAt)
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                detail.publishedDate = `${months[publishedAt.getMonth()]} ${publishedAt.getDate()}, ${publishedAt.getFullYear()}`
+                const detail = res.data.items[0];
 
-                const formatCount = (count) => count < 1000 ? count : count < 1000000 ? `${Math.trunc(count / 1000)}K` : count < 1000000000 ? `${Math.trunc(count / 1000000)}M` : count
-                const likeCount = Number(detail.statistics.likeCount)
-                detail.likeCount = formatCount(likeCount)
-                const dislikeCount = Number(detail.statistics.dislikeCount)
-                detail.dislikeCount = formatCount(dislikeCount)
+                const publishedAt = new Date(detail.snippet.publishedAt);
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                detail.publishedDate = `${months[publishedAt.getMonth()]} ${publishedAt.getDate()}, ${publishedAt.getFullYear()}`;
+
+                const formatCount = (count) => count < 1000 ? count : count < 1000000 ? `${Math.trunc(count / 1000)}K` : count < 1000000000 ? `${Math.trunc(count / 1000000)}M` : count;
+                const likeCount = Number(detail.statistics.likeCount);
+                detail.likeCount = formatCount(likeCount);
+                const dislikeCount = Number(detail.statistics.dislikeCount);
+                detail.dislikeCount = formatCount(dislikeCount);
 
                 // console.log(detail)
-                setVideoDetail(detail)
-            })()
-        } else return null
-    }, [videoId])
+                setVideoDetail(detail);
+            })();
+        } else return null;
+    }, [videoId]);
 
     return (
         <Grid container className={classes.container}>
@@ -96,7 +97,7 @@ const VideoPage = () => {
                     <VideoPlayer videoId={videoId} />
                 </Grid>
                 <Grid>
-                    {videoDetail.etag ? 
+                    {videoDetail.etag ?
                         <>
                             <Typography variant="h6" component="h1">
                                 {videoDetail.snippet.title}
@@ -117,12 +118,12 @@ const VideoPage = () => {
                                 {videoDetail.snippet.description}
                             </Typography>
                         </>
-                    : null }
+                        : null}
                 </Grid>
             </Grid>
             <Grid item className={classes.right} />
         </Grid>
-    )
-}
+    );
+};
 
-export default VideoPage
+export default VideoPage;

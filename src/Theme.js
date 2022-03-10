@@ -37,12 +37,12 @@ const withTheme = (Component) => {
         const [darkMode, setDarkMode] = React.useState(false);
 
         return (
-            <ThemeProvider theme={darkMode ? themeDark : themeLight }>
+            <ThemeProvider theme={darkMode ? themeDark : themeLight}>
                 <CssBaseline />
                 <Component {...propsOfWrappedComponent} darkMode={darkMode} setDarkMode={setDarkMode} />
             </ThemeProvider>
         );
-    }
-}
+    };
+};
 
 export default withTheme;

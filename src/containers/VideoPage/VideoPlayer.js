@@ -1,5 +1,5 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core'
+import React from 'react';
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     iframe: {
@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         height: '100%'
     }
-}))
+}));
 
 const VideoPlayer = ({ videoId }) => {
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <iframe className={classes.iframe}
@@ -25,7 +25,7 @@ const VideoPlayer = ({ videoId }) => {
             allowFullScreen
             title="Embedded YouTube"
         />
-    )
-}
+    );
+};
 
-export default VideoPlayer
+export default VideoPlayer;

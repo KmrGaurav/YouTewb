@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-ui/core'
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     cardMedia: {
@@ -10,11 +10,11 @@ const useStyles = makeStyles(theme => ({
             width: 320,
         }
     }
-}))
+}));
 
 const HomeVideoCard = ({ item }) => {
-    const classes = useStyles()
-    
+    const classes = useStyles();
+
     return (
         <Card>
             <CardContent>
@@ -23,7 +23,7 @@ const HomeVideoCard = ({ item }) => {
                 <Typography gutterBottom variant="subtitle2" component="h2">{item.snippet.channelTitle}</Typography>
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
-export default HomeVideoCard
+export default HomeVideoCard;
