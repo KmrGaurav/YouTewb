@@ -18,6 +18,6 @@ const urlParser = (p_pathname, p_param) => {
 
     const value = query.split('=')[1];
     return value ? value : null;
-}
+};
 
 export default urlParser;

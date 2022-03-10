@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-ui/core'
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     cardContent: {
@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
             }
         }
     }
-}))
+}));
 
 const SearchVideoCard = ({ item }) => {
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <Card>
@@ -40,7 +40,7 @@ const SearchVideoCard = ({ item }) => {
                 </div>
             </CardContent>
         </Card>
-    )
-}
+    );
+};
 
-export default SearchVideoCard
+export default SearchVideoCard;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { AppBar, Toolbar, InputBase, Typography, makeStyles } from '@material-ui/core'
+import React, { useState, useEffect } from 'react';
+import { AppBar, Toolbar, InputBase, Typography, makeStyles } from '@material-ui/core';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -7,9 +7,9 @@ import { Popper, ClickAwayListener, MenuList, MenuItem, IconButton, Switch } fro
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom';
 
-import urlParser from '../utils/urlParser'
+import urlParser from '../utils/urlParser';
 
 const useStyles = makeStyles(theme => ({
     appBar: {
@@ -54,28 +54,28 @@ const useStyles = makeStyles(theme => ({
         padding: '0px',
         border: 'none'
     }
-}))
+}));
 
 const Header = ({ darkMode, setDarkMode }) => {
-    const [searchTerm, setSearchTerm] = useState('')
+    const [searchTerm, setSearchTerm] = useState('');
 
-    const value = urlParser('results', 'search_query')
+    const value = urlParser('results', 'search_query');
     useEffect(() => {
         if (value) {
-            setSearchTerm(value.split('+').join(' '))
+            setSearchTerm(value.split('+').join(' '));
         }
-    }, [value])
+    }, [value]);
 
-    const classes = useStyles()
-    const history = useHistory()
+    const classes = useStyles();
+    const history = useHistory();
 
     const onSearchSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        if(searchTerm) {
-            history.push(`/results?search_query=${searchTerm.split(' ').join('+')}`)
+        if (searchTerm) {
+            history.push(`/results?search_query=${searchTerm.split(' ').join('+')}`);
         }
-    }
+    };
 
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
@@ -83,12 +83,12 @@ const Header = ({ darkMode, setDarkMode }) => {
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
-    
+
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
-    
+
         setOpen(false);
     };
 
@@ -96,7 +96,7 @@ const Header = ({ darkMode, setDarkMode }) => {
         <AppBar className={classes.appBar}>
             <Toolbar className={classes.toolBar}>
                 <Link to="/" className={classes.title}>
-                    <YouTubeIcon style={{color: 'red'}}/>
+                    <YouTubeIcon style={{ color: 'red' }} />
                     <Typography variant="h6" noWrap>YouTewb</Typography>
                 </Link>
                 <form onSubmit={onSearchSubmit} className={classes.search}>
@@ -115,26 +115,26 @@ const Header = ({ darkMode, setDarkMode }) => {
                     </button>
                 </form>
                 {/* <div> */}
-                    <IconButton ref={anchorRef} onClick={handleToggle} color="inherit">
-                        <MoreVertIcon />
-                    </IconButton>
-                    <Popper open={open} anchorEl={anchorRef.current} style={{ zIndex: '1100' }} placement="left-start">
-                        {/* <Paper> */}
-                            <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList>
-                                    <MenuItem>
-                                        <Brightness4Icon style={{ marginRight: '16px' }} />
-                                        Appearance: Dark
-                                        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-                                    </MenuItem>
-                                </MenuList>
-                            </ClickAwayListener>
-                        {/* </Paper> */}
-                    </Popper>
+                <IconButton ref={anchorRef} onClick={handleToggle} color="inherit">
+                    <MoreVertIcon />
+                </IconButton>
+                <Popper open={open} anchorEl={anchorRef.current} style={{ zIndex: '1100' }} placement="left-start">
+                    {/* <Paper> */}
+                    <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList>
+                            <MenuItem>
+                                <Brightness4Icon style={{ marginRight: '16px' }} />
+                                Appearance: Dark
+                                <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+                            </MenuItem>
+                        </MenuList>
+                    </ClickAwayListener>
+                    {/* </Paper> */}
+                </Popper>
                 {/* </div> */}
             </Toolbar>
         </AppBar>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
