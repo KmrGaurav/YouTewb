@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const VideoPlayer = ({ videoId }) => {
+// NOTE: Rethink type of videoId
+const VideoPlayer: React.FC<{ videoId: string | null }> = ({ videoId }): JSX.Element => {
     const classes = useStyles();
 
     return (

@@ -56,8 +56,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const VideoPage = () => {
-    const [videoDetail, setVideoDetail] = useState({});
+const VideoPage: React.FC = (): JSX.Element => {
+    // NOTE: Remove any
+    const [videoDetail, setVideoDetail] = useState<any>({});
 
     const classes = useStyles();
 
@@ -78,7 +79,7 @@ const VideoPage = () => {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
                 detail.publishedDate = `${months[publishedAt.getMonth()]} ${publishedAt.getDate()}, ${publishedAt.getFullYear()}`;
 
-                const formatCount = (count) => count < 1000 ? count : count < 1000000 ? `${Math.trunc(count / 1000)}K` : count < 1000000000 ? `${Math.trunc(count / 1000000)}M` : count;
+                const formatCount = (count: number) => count < 1000 ? count : count < 1000000 ? `${Math.trunc(count / 1000)}K` : count < 1000000000 ? `${Math.trunc(count / 1000000)}M` : count;
                 const likeCount = Number(detail.statistics.likeCount);
                 detail.likeCount = formatCount(likeCount);
                 const dislikeCount = Number(detail.statistics.dislikeCount);
@@ -87,7 +88,7 @@ const VideoPage = () => {
                 // console.log(detail)
                 setVideoDetail(detail);
             })();
-        } else return null;
+        }
     }, [videoId]);
 
     return (
