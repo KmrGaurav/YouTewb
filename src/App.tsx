@@ -13,7 +13,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const App = (props) => {
+interface IProps {
+    darkMode: boolean;
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const App: React.FC<IProps> = (props): JSX.Element => {
     const classes = useStyles();
     const { darkMode, setDarkMode } = props;
 

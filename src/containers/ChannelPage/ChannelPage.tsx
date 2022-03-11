@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ChannelPage = () => {
+const ChannelPage: React.FC = (): JSX.Element => {
     const classes = useStyles();
 
-    const searchedChannel = urlParser("c");
+    const searchedChannel = urlParser("c", "");
     console.log(searchedChannel);
 
     return (

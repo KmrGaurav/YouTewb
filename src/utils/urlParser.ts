@@ -1,7 +1,8 @@
-const urlParser = (p_pathname, p_param) => {
+const urlParser = (p_pathname: string, p_param: string): string | null => {
     const location = document.location;
+    const pathname = location.pathname;
 
-    if (location.pathname !== p_pathname && location.pathname.split('/')[1] !== p_pathname) {
+    if (pathname !== '/results' && pathname !== '/watch' && pathname !== '/c') {
         return null;
     }
 
