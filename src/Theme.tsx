@@ -31,9 +31,10 @@ const themeDark = createMuiTheme({
         }
     }
 });
-
-const withTheme = (Component) => {
-    return (propsOfWrappedComponent) => {
+// NOTE: Remove any
+const withTheme = (Component: any) => {
+    // NOTE: Remove any
+    return (propsOfWrappedComponent: any) => {
         const [darkMode, setDarkMode] = React.useState(false);
 
         return (

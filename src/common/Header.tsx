@@ -56,7 +56,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Header = ({ darkMode, setDarkMode }) => {
+interface IProps {
+    darkMode: boolean;
+    setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header: React.FC<IProps> = ({ darkMode, setDarkMode }): JSX.Element => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const value = urlParser('results', 'search_query');
@@ -69,7 +74,7 @@ const Header = ({ darkMode, setDarkMode }) => {
     const classes = useStyles();
     const history = useHistory();
 
-    const onSearchSubmit = (e) => {
+    const onSearchSubmit = (e: any) => {
         e.preventDefault();
 
         if (searchTerm) {
@@ -78,13 +83,15 @@ const Header = ({ darkMode, setDarkMode }) => {
     };
 
     const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
+    // NOTE: Remove any
+    const anchorRef = React.useRef<any>(null);
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
 
-    const handleClose = (event) => {
+    // NOTE: Remove any
+    const handleClose = (event: any) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
             return;
         }
@@ -118,7 +125,7 @@ const Header = ({ darkMode, setDarkMode }) => {
                 <IconButton ref={anchorRef} onClick={handleToggle} color="inherit">
                     <MoreVertIcon />
                 </IconButton>
-                <Popper open={open} anchorEl={anchorRef.current} style={{ zIndex: '1100' }} placement="left-start">
+                <Popper open={open} anchorEl={anchorRef.current} style={{ zIndex: 1100 }} placement="left-start">
                     {/* <Paper> */}
                     <ClickAwayListener onClickAway={handleClose}>
                         <MenuList>
