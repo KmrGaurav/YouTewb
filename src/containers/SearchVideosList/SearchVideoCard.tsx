@@ -26,7 +26,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SearchVideoCard = ({ item }) => {
+// NOTE: Remove any
+const SearchVideoCard: React.FC<any> = ({ item }): JSX.Element => {
     const classes = useStyles();
 
     return (

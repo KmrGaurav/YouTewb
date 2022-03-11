@@ -27,8 +27,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SearchVideosList = () => {
-    const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState({});
+const SearchVideosList: React.FC = (): JSX.Element => {
+    // NOTE: Remove any
+    const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState<any>(null);
     const classes = useStyles();
 
     const searchTerm = urlParser('results', 'search_query');
@@ -46,20 +47,20 @@ const SearchVideosList = () => {
         }
     }, [searchTerm]);
 
-    if (!fetchedSearchedVideos.etag) {
-        return null;
+    if (!fetchedSearchedVideos?.etag) {
+        return <></>;
     }
 
     return (
         <Grid container className={classes.container}>
-            {fetchedSearchedVideos.items.map(item => (
-                item.id.kind === 'youtube#video' ?
+            {fetchedSearchedVideos.items.map((item: any /* NOTE: Remove any */) => (
+                item.id.kind === 'youtube#video' && (
                     <Grid item key={item.etag}>
                         <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
                             <SearchVideoCard item={item} />
                         </Link>
                     </Grid>
-                    : null
+                )
             ))}
         </Grid>
     );
