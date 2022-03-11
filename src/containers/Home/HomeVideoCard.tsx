@@ -12,7 +12,8 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const HomeVideoCard = ({ item }) => {
+// NOTE: Remove any
+const HomeVideoCard: React.FC<{ item: any }> = ({ item }): JSX.Element => {
     const classes = useStyles();
 
     return (

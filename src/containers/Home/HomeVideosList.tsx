@@ -21,8 +21,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const HomeVideosList = () => {
-    const [fetchedVideos, setFetchedVideos] = useState({});
+const HomeVideosList: React.FC = (): JSX.Element => {
+    // NOTE: Remove any
+    const [fetchedVideos, setFetchedVideos] = useState<any>(null);
     const classes = useStyles();
 
     useEffect(() => {
@@ -36,20 +37,20 @@ const HomeVideosList = () => {
         })();
     }, []);
 
-    if (!fetchedVideos.etag) {
-        return null;
+    if (!fetchedVideos?.etag) {
+        return <></>;
     }
 
     return (
         <Grid className={classes.container} container spacing={2}>
-            {fetchedVideos.items.map(item => (
-                item.id.kind === 'youtube#video' ?
+            {fetchedVideos.items.map((item: any /* NOTE: Remove any */) => (
+                item.id.kind === 'youtube#video' && (
                     <Grid key={item.etag} item xs={12} sm={6} md={3}>
                         <Link to={`/watch?v=${item.id.videoId}`} className={classes.link}>
                             <HomeVideoCard item={item} />
                         </Link>
                     </Grid>
-                    : null
+                )
             ))}
         </Grid>
     );
