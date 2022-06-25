@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 const ChannelPage: React.FC = (): JSX.Element => {
     const classes = useStyles();
 
-    const searchedChannel = urlParser("c", "");
+    const searchedChannel = urlParser();
     console.log(searchedChannel);
 
     return (

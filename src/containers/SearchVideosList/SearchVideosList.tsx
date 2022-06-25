@@ -32,7 +32,7 @@ const SearchVideosList: React.FC = (): JSX.Element => {
     const [fetchedSearchedVideos, setFetchedSearchedVideos] = useState<any>(null);
     const classes = useStyles();
 
-    const searchTerm = urlParser('results', 'search_query');
+    const searchTerm = urlParser();
     useEffect(() => {
         if (searchTerm) {
             (async () => {

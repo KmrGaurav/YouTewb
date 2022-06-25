@@ -62,7 +62,7 @@ const VideoPage: React.FC = (): JSX.Element => {
 
     const classes = useStyles();
 
-    const videoId = urlParser('watch', 'v');
+    const videoId = urlParser();
     useEffect(() => {
         if (videoId) {
             (async () => {
@@ -111,7 +111,7 @@ const VideoPage: React.FC = (): JSX.Element => {
                                     <ThumbUpIcon />
                                     <Typography variant="body1" component="h6">{videoDetail.likeCount}</Typography>
                                     <ThumbDownIcon />
-                                    <Typography variant="body1" component="h6">{videoDetail.dislikeCount}</Typography>
+                                    {/* <Typography variant="body1" component="h6">{videoDetail.dislikeCount}</Typography> */}
                                 </div>
                             </div>
                             <hr style={{ margin: '20px 0', color: 'red' }} />

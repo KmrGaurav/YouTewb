@@ -64,10 +64,12 @@ interface IProps {
 const Header: React.FC<IProps> = ({ darkMode, setDarkMode }): JSX.Element => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const value = urlParser('results', 'search_query');
+    const value = urlParser();
     useEffect(() => {
-        if (value) {
-            setSearchTerm(value.split('+').join(' '));
+        if (document.location.pathname.split('/')[1] === 'results') {
+            if (value) {
+                setSearchTerm(value.split('+').join(' '));
+            }
         }
     }, [value]);
 
